@@ -64,13 +64,36 @@
 | 目的/説明 definition     | プロファイルが対象とする学習ログや用途 | 日本の初等中等教育におけるLMS学習ログ標準プロファイル |
 | ドキュメントバージョン   | 文書版数                               | 2026年度版                                            |
 
-# 4.　StatementTemplate
+## 2.3　共通記述規則
 
-## 4.1　本章の位置づけ
+　本プロファイルで定義するすべてのStatementTemplateに対して、以下のRulesを適用する。
+
+| 項目説明 (Description / ScopeNote)   | Location (JSONPath)                        | Presence    |
+| :----------------------------------- | :----------------------------------------- | :---------- |
+| **ステートメントID**                 | `$.id`                                     | included    |
+| **タイムスタンプ**                   | `$.timestamp`                              | included    |
+| **アクター**                         | `$.actor`                                  | included    |
+| **アクターのオブジェクトタイプ**     | `$.actor.objectType`                       | included    |
+| **アクターのアカウントホームページ** | `$.actor.account.homePage`                 | included    |
+| **アクターのアカウント名**           | `$.actor.account.name`                     | included    |
+| **動詞の表示名(英語)**               | `$.verb.display.en`                        | included    |
+| **オブジェクトのオブジェクトタイプ** | `$.object.objectType`                      | included    |
+| **オブジェクトID**                   | `$.object.id`                              | included    |
+| **オブジェクト定義のタイプ**         | `$.object.definition.type`                 | included    |
+| **オブジェクト定義の名称(日本語)**   | `$.object.definition.name['ja-jp']`        | recommended |
+| **オブジェクト定義の説明(日本語)**   | `$.object.definition.description['ja-jp']` | recommended |
+| **コンテキスト**                     | `$.context`                                | included    |
+| **コンテキストの言語**               | `$.context.language`                       | included    |
+| **コンテキストのプラットフォーム**   | `$.context.platform`                       | included    |
+| **プロファイルバージョン**           | `$.version`                                | included    |
+
+# 3.　StatementTemplate
+
+## 3.1　本章の位置づけ
 
 　本章では、LMSプロファイルにおける各操作のデータ構造を定義する。各テンプレートは以下の「基本仕様」および「記述規則」の構成で記述される。
 
-## 4.2　前提条件
+## 3.2　前提条件
 
 - 基本仕様
   - 冒頭にdifinitionの位置づけとして、Templateの目的やどのような操作を記録するためのものかを定義する。
@@ -86,11 +109,11 @@
 - Markdownテーブルの構成
   - 各Templateの末尾には、システム設計・実装時に参照しやすいよう、記述規則（Rules）を一覧化したテーブルを配置する。
 
-## 4.3　StatementTemplate一覧
+## 3.3　StatementTemplate一覧
 
-### 4.3.1　学習課題の作成
+### 3.3.1　学習課題の作成
 
-#### 4.3.1.1　基本仕様
+#### 3.3.1.1　基本仕様
 
 - 学習課題を作成したことを記録するためのテンプレート。
 - 識別情報
@@ -106,7 +129,7 @@
 | :----------------- | :---------------------------------------------------- |
 | objectActivityType | http://adlnet.gov/expapi/activities/school-assessment |
 
-#### 4.3.1.2　記述規則（Rules）
+#### 3.3.1.2　記述規則（Rules）
 
 1. $.object.definition.extensions['https://w3id.org/japan-xapi/extensions/unit']
    1. recommended
@@ -121,7 +144,7 @@
    1. recommended
    2. 学年 (Core Profile参照)
 
-#### 4.3.1.3　Markdownテーブル
+#### 3.3.1.3　Markdownテーブル
 
 | 項目説明 (Description / ScopeNote)                            | Location (JSONPath)                                                                | Presence    |
 | :------------------------------------------------------------ | :--------------------------------------------------------------------------------- | :---------- |
@@ -130,9 +153,9 @@
 | **教科**<br>Core Profileで定義された教科Extensionを使用する。 | `$.object.definition.extensions['https://w3id.org/japan-xapi/extensions/subject']` | recommended |
 | **学年**<br>Core Profileで定義された学年Extensionを使用する。 | `$.object.definition.extensions['https://w3id.org/japan-xapi/extensions/grade']`   | recommended |
 
-### 4.3.2　学習課題の配布
+### 3.3.2　学習課題の配布
 
-#### 4.3.2.1　基本仕様
+#### 3.3.2.1　基本仕様
 
 - 学習課題を児童生徒に配布したことを記録するためのテンプレート。
 - 識別情報
@@ -147,9 +170,9 @@
 | verb | http://adlnet.gov/expapi/verbs/shared |
 | :--- | :------------------------------------ |
 
-### 4.3.3　学習課題の実施開始 (Launched)
+### 3.3.3　学習課題の実施開始 (Launched)
 
-#### 4.3.3.1　基本仕様
+#### 3.3.3.1　基本仕様
 
 - 学習課題を開始したことを記録するためのテンプレート。
 - 識別情報
@@ -165,9 +188,9 @@
 | :----------------- | :---------------------------------------------------- |
 | objectActivityType | http://adlnet.gov/expapi/activities/school-assessment |
 
-### 4.3.4　学習課題の完了 (Completed)
+### 3.3.4　学習課題の完了 (Completed)
 
-#### 4.3.4.1　基本仕様
+#### 3.3.4.1　基本仕様
 
 - 学習課題を完了したことを記録するためのテンプレート。
 - 識別情報
@@ -183,9 +206,9 @@
 | :----------------- | :---------------------------------------------------- |
 | objectActivityType | http://adlnet.gov/expapi/activities/school-assessment |
 
-### 4.3.5　学習課題へのフィードバック (Responded)
+### 3.3.5　学習課題へのフィードバック (Responded)
 
-#### 4.3.5.1　基本仕様
+#### 3.3.5.1　基本仕様
 
 - 教員が課題成果に対してコメント等を行ったことを記録するためのテンプレート。
 - 識別情報

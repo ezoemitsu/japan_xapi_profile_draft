@@ -64,13 +64,36 @@
 | 目的/説明 definition     | プロファイルが対象とする学習ログや用途 | 日本の初等中等教育における電子書籍学習ログ標準プロファイル |
 | ドキュメントバージョン   | 文書版数                               | 2026年度版                                                 |
 
-# 4.　StatementTemplate
+## 2.3　共通記述規則
 
-## 4.1　本章の位置づけ
+　本プロファイルで定義するすべてのStatementTemplateに対して、以下のRulesを適用する。
+
+| 項目説明 (Description / ScopeNote)   | Location (JSONPath)                        | Presence    |
+| :----------------------------------- | :----------------------------------------- | :---------- |
+| **ステートメントID**                 | `$.id`                                     | included    |
+| **タイムスタンプ**                   | `$.timestamp`                              | included    |
+| **アクター**                         | `$.actor`                                  | included    |
+| **アクターのオブジェクトタイプ**     | `$.actor.objectType`                       | included    |
+| **アクターのアカウントホームページ** | `$.actor.account.homePage`                 | included    |
+| **アクターのアカウント名**           | `$.actor.account.name`                     | included    |
+| **動詞の表示名(英語)**               | `$.verb.display.en`                        | included    |
+| **オブジェクトのオブジェクトタイプ** | `$.object.objectType`                      | included    |
+| **オブジェクトID**                   | `$.object.id`                              | included    |
+| **オブジェクト定義のタイプ**         | `$.object.definition.type`                 | included    |
+| **オブジェクト定義の名称(日本語)**   | `$.object.definition.name['ja-jp']`        | recommended |
+| **オブジェクト定義の説明(日本語)**   | `$.object.definition.description['ja-jp']` | recommended |
+| **コンテキスト**                     | `$.context`                                | included    |
+| **コンテキストの言語**               | `$.context.language`                       | included    |
+| **コンテキストのプラットフォーム**   | `$.context.platform`                       | included    |
+| **プロファイルバージョン**           | `$.version`                                | included    |
+
+# 3.　StatementTemplate
+
+## 3.1　本章の位置づけ
 
 　本章では、eBookプロファイルにおける各操作のデータ構造を定義する。各テンプレートは以下の「基本仕様」および「記述規則」の構成で記述される。
 
-## 4.2　前提条件
+## 3.2　前提条件
 
 - 基本仕様
   - 冒頭にdifinitionの位置づけとして、Templateの目的やどのような操作を記録するためのものかを定義する。
@@ -86,11 +109,11 @@
 - Markdownテーブルの構成
   - 各Templateの末尾には、システム設計・実装時に参照しやすいよう、記述規則（Rules）を一覧化したテーブルを配置する。
 
-## 4.3　StatementTemplate一覧
+## 3.3　StatementTemplate一覧
 
-### 4.3.1　プラットフォームの起動
+### 3.3.1　プラットフォームの起動
 
-#### 4.3.1.1　基本仕様
+#### 3.3.1.1　基本仕様
 
 - 電子書籍ビューアがシステムとして起動されたことを記録するためのテンプレート。
 - 識別情報
@@ -106,7 +129,7 @@
 | :----------------- | :------------------------------------------------------ |
 | objectActivityType | https://w3id.org/japan-xapi/activity-types/ebook/viewer |
 
-#### 4.3.1.2　記述規則（Rules）
+#### 3.3.1.2　記述規則（Rules）
 
 1. $.object.id
    1. included
@@ -115,16 +138,16 @@
    1. recommended
    2. ビューアの起動のきっかけを記録する（user-launch, resume, system-launch等）
 
-#### 4.3.1.3　Markdownテーブル
+#### 3.3.1.3　Markdownテーブル
 
 | 項目説明 (Description / ScopeNote)                           | Location (JSONPath)                                                                  | Presence    |
 | :----------------------------------------------------------- | :----------------------------------------------------------------------------------- | :---------- |
 | **ビューアID**<br>開始されたビューアを識別するIRIまたはURL。 | `$.object.id`                                                                        | included    |
 | **起動理由**<br>例："user-launch", "resume", "system-launch" | `$.context.extensions['https://w3id.org/japan-xapi/extensions/ebook/launch-reason']` | recommended |
 
-### 4.3.2　コンテンツの利用開始
+### 3.3.2　コンテンツの利用開始
 
-#### 4.3.2.1　基本仕様
+#### 3.3.2.1　基本仕様
 
 - 書籍を開いたことを記録するためのテンプレート。
 - 識別情報
@@ -140,9 +163,9 @@
 | :----------------- | :-------------------------------------- |
 | objectActivityType | http://activitystrea.ms/schema/1.0/book |
 
-### 4.3.3　ページ移動 (Progressed)
+### 3.3.3　ページ移動 (Progressed)
 
-#### 4.3.3.1　基本仕様
+#### 3.3.3.1　基本仕様
 
 - ページめくり等の移動を記録するためのテンプレート。
 - 識別情報
@@ -154,13 +177,13 @@
 
 - 判定条件
 
-| verb               | https://w3id.org/japan-xapi/verbs/progressed |
-| :----------------- | :------------------------------------------- |
-| objectActivityType | http://activitystrea.ms/schema/1.0/page      |
+| verb               | http://adlnet.gov/expapi/verbs/progressed |
+| :----------------- | :---------------------------------------- |
+| objectActivityType | http://activitystrea.ms/schema/1.0/page   |
 
-### 4.3.4　設定変更 (Interacted)
+### 3.3.4　設定変更 (Interacted)
 
-#### 4.3.4.1　基本仕様
+#### 3.3.4.1　基本仕様
 
 - 拡大縮小、文字サイズ変更などを記録するためのテンプレート。
 - 識別情報
@@ -172,13 +195,13 @@
 
 - 判定条件
 
-| verb               | https://w3id.org/japan-xapi/verbs/interacted              |
+| verb               | http://adlnet.gov/expapi/verbs/interacted                 |
 | :----------------- | :-------------------------------------------------------- |
 | objectActivityType | https://w3id.org/japan-xapi/activity-types/ebook/settings |
 
-### 4.3.5　注釈・書き込み (Noted)
+### 3.3.5　注釈・書き込み (Noted)
 
-#### 4.3.5.1　基本仕様
+#### 3.3.5.1　基本仕様
 
 - メモやペンの書き込みを記録するためのテンプレート。
 - 識別情報

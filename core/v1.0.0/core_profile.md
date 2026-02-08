@@ -73,7 +73,7 @@
 
 #### highlighted
 
-- **IRI**: `https://w3id.org/japan-xapi/verbs/highlighted`
+- **IRI**: `https://w3id.org/xapi/adb/verbs/highlighted`
 - **Display**: `highlighted` (en), `ハイライトした` (ja)
 - **Definition**: テキストや画像の一部を強調表示する行為。
 - **Scope Note**: 重要な箇所へのマーキング等に使用する。

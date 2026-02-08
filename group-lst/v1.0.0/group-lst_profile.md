@@ -64,13 +64,36 @@
 | 目的/説明 definition     | プロファイルが対象とする学習ログや用途 | 日本の初等中等教育におけるグループ学習支援ツールログ標準プロファイル |
 | ドキュメントバージョン   | 文書版数                               | 2026年度版                                                           |
 
-# 4.　StatementTemplate
+## 2.3　共通記述規則
 
-## 4.1　本章の位置づけ
+　本プロファイルで定義するすべてのStatementTemplateに対して、以下のRulesを適用する。
+
+| 項目説明 (Description / ScopeNote)   | Location (JSONPath)                        | Presence    |
+| :----------------------------------- | :----------------------------------------- | :---------- |
+| **ステートメントID**                 | `$.id`                                     | included    |
+| **タイムスタンプ**                   | `$.timestamp`                              | included    |
+| **アクター**                         | `$.actor`                                  | included    |
+| **アクターのオブジェクトタイプ**     | `$.actor.objectType`                       | included    |
+| **アクターのアカウントホームページ** | `$.actor.account.homePage`                 | included    |
+| **アクターのアカウント名**           | `$.actor.account.name`                     | included    |
+| **動詞の表示名(英語)**               | `$.verb.display.en`                        | included    |
+| **オブジェクトのオブジェクトタイプ** | `$.object.objectType`                      | included    |
+| **オブジェクトID**                   | `$.object.id`                              | included    |
+| **オブジェクト定義のタイプ**         | `$.object.definition.type`                 | included    |
+| **オブジェクト定義の名称(日本語)**   | `$.object.definition.name['ja-jp']`        | recommended |
+| **オブジェクト定義の説明(日本語)**   | `$.object.definition.description['ja-jp']` | recommended |
+| **コンテキスト**                     | `$.context`                                | included    |
+| **コンテキストの言語**               | `$.context.language`                       | included    |
+| **コンテキストのプラットフォーム**   | `$.context.platform`                       | included    |
+| **プロファイルバージョン**           | `$.version`                                | included    |
+
+# 3.　StatementTemplate
+
+## 3.1　本章の位置づけ
 
 　本章では、グループ学習支援ツールプロファイルにおける各操作のデータ構造を定義する。各テンプレートは以下の「基本仕様」および「記述規則」の構成で記述される。
 
-## 4.2　前提条件
+## 3.2　前提条件
 
 - 基本仕様
   - 冒頭にdifinitionの位置づけとして、Templateの目的やどのような操作を記録するためのものかを定義する。
@@ -86,11 +109,11 @@
 - Markdownテーブルの構成
   - 各Templateの末尾には、システム設計・実装時に参照しやすいよう、記述規則（Rules）を一覧化したテーブルを配置する。
 
-## 4.3　StatementTemplate一覧
+## 3.3　StatementTemplate一覧
 
-### 4.3.1　ツールの起動
+### 3.3.1　ツールの起動
 
-#### 4.3.1.1　基本仕様
+#### 3.3.1.1　基本仕様
 
 - グループ学習支援ツールがシステムとして起動されたことを記録するためのテンプレート。
 - 識別情報
@@ -102,25 +125,25 @@
 
 - 判定条件
 
-| verb               | http://adlnet.gov/expapi/verbs/launched               |
+| verb               | https://w3id.org/xapi/adl/verbs/launched              |
 | :----------------- | :---------------------------------------------------- |
 | objectActivityType | https://w3id.org/japan-xapi/activity-types/group/tool |
 
-#### 4.3.1.2　記述規則（Rules）
+#### 3.3.1.2　記述規則（Rules）
 
 1. $.object.id
    1. included
    2. 起動したツールを識別するIRIまたはURL
 
-#### 4.3.1.3　Markdownテーブル
+#### 3.3.1.3　Markdownテーブル
 
 | 項目説明 (Description / ScopeNote)                     | Location (JSONPath) | Presence |
 | :----------------------------------------------------- | :------------------ | :------- |
 | **ツールID**<br>起動したツールを識別するIRIまたはURL。 | `$.object.id`       | included |
 
-### 4.3.2　ツール内でのコンテンツ利用開始
+### 3.3.2　ツール内でのコンテンツ利用開始
 
-#### 4.3.2.1　基本仕様
+#### 3.3.2.1　基本仕様
 
 - ツール内の特定コンテンツ（スライド等）の利用を開始したことを記録するためのテンプレート。
 - 識別情報
@@ -132,13 +155,13 @@
 
 - 判定条件
 
-| verb               | http://adlnet.gov/expapi/verbs/launched    |
+| verb               | https://w3id.org/xapi/adl/verbs/launched   |
 | :----------------- | :----------------------------------------- |
 | objectActivityType | http://id.tincanapi.com/activitytype/slide |
 
-### 4.3.3　オブジェクトの作成 (Created)
+### 3.3.3　オブジェクトの作成 (Created)
 
-#### 4.3.3.1　基本仕様
+#### 3.3.3.1　基本仕様
 
 - コンテンツ内でテキストや図形を作成したことを記録するためのテンプレート。
 - 識別情報
@@ -154,21 +177,21 @@
 | :----------------- | :-------------------------------------------- |
 | objectActivityType | http://id.tincanapi.com/activitytype/slide    |
 
-#### 4.3.3.2　記述規則（Rules）
+#### 3.3.3.2　記述規則（Rules）
 
 1. $.object.definition.extensions['https://w3id.org/japan-xapi/extensions/scrapbook-item-type']
    1. recommended
    2. 作成されたオブジェクトの種類（text, shape等） (Core Profile参照)
 
-#### 4.3.3.3　Markdownテーブル
+#### 3.3.3.3　Markdownテーブル
 
 | 項目説明 (Description / ScopeNote)                                      | Location (JSONPath)                                                                            | Presence    |
 | :---------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------- | :---------- |
 | **オブジェクト種類**<br>作成されたオブジェクトの種類（text, shape等）。 | `$.object.definition.extensions['https://w3id.org/japan-xapi/extensions/scrapbook-item-type']` | recommended |
 
-### 4.3.4　議論スレッドの作成
+### 3.3.4　議論スレッドの作成
 
-#### 4.3.4.1　基本仕様
+#### 3.3.4.1　基本仕様
 
 - 議論のためのスレッドを作成したことを記録するためのテンプレート。
 - 識別情報
@@ -184,9 +207,9 @@
 | :----------------- | :---------------------------------------------- |
 | objectActivityType | http://id.tincanapi.com/activitytype/discussion |
 
-### 4.3.5　スレッドへの書き込み (Replied)
+### 3.3.5　スレッドへの書き込み (Replied)
 
-#### 4.3.5.1　基本仕様
+#### 3.3.5.1　基本仕様
 
 - スレッドに対してコメント・返信を行ったことを記録するためのテンプレート。
 - 識別情報
@@ -202,9 +225,9 @@
 | :----------------- | :---------------------------------------------- |
 | objectActivityType | http://id.tincanapi.com/activitytype/discussion |
 
-### 4.3.6　スタンプ送信 (Voted-up)
+### 3.3.6　スタンプ送信 (Voted-up)
 
-#### 4.3.6.1　基本仕様
+#### 3.3.6.1　基本仕様
 
 - 「いいね」等のスタンプを送信したことを記録するためのテンプレート。
 - 識別情報
