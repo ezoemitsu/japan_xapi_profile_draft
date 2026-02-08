@@ -1,0 +1,18 @@
+- verbの考え方
+  - 原則）既存verbがある場合は、新しいverbは作らない
+    - [http://adlnet.gov/expapi/verbs/xxxx](http://adlnet.gov/expapi/verbs/launched)
+    - 既存で過去形ではないverbはそのまま運用する
+    - ExactMatchを使って本プロファイルを再定義することはしない
+  - 推奨）既存verbが複数ある場合で意味（discription）が同じ場合は上から順に選択する
+    - １）authored profile内のw3idドメインのもの
+      - [https://w3id.org/xapi/adl/verbs/xxxx](https://w3id.org/xapi/adl/verbs/launched)
+    - ２）authorizeされているIRI
+    - ３）報告書等に記載されているSIPや京大プロファイルのもの
+  - 独自）既存verbに該当するものがない場合のみ、w3idで定義する
+- Statement に書く Concept IRI（推奨：unversioned）
+  - [https://w3id.org/japan-xapi/verbs/…](https://w3id.org/japan-xapi/verbs/…)
+  - [https://w3id.org/japan-xapi/activity-types/…](https://w3id.org/japan-xapi/activity-types/…)
+  - [https://w3id.org/japan-xapi/extensions/…](https://w3id.org/japan-xapi/extensions/…)
+- Profile 実体の置き場（推奨：versioned）
+  - [https://w3id.org/japan-xapi/profile/core/v1.1.0/profile.jsonld](https://w3id.org/japan-xapi/profile/core/v1.1.0/profile.jsonld)
+  - [https://w3id.org/japan-xapi/profile/ebook/v1.0.0/profile.jsonld](https://w3id.org/japan-xapi/profile/ebook/v1.0.0/profile.jsonld)
